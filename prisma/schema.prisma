@@ -45,6 +45,16 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+
+  username String @unique
+  bio String? 
+  link String?
+  createdAt DateTime? @default(now())
+
+  followers     Follow[] @relation("follower")
+  followeds     Follow[] @relation("followed")
+  posts Post[]
+  likes Like[]
 }
 
 model VerificationToken {
@@ -53,4 +63,39 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Post {
+  id String @id @default(uuid())
+  content String
+  parentId String?
+  userId String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  replies Post[] @relation("comments")
+  parent Post? @relation("comments", fields: [parentId], references: [id], onDelete: Cascade)
+
+  likes Like[]
+}
+
+model Like {
+  id String @id @default(uuid())
+  userId String
+  postId String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model Follow {
+  id         String @id @default(cuid())
+  followerId String
+  followingId String
+  createdAt DateTime @default(now())
+
+  follower User @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  followed User @relation("followed", fields: [followingId], references: [id], onDelete: Cascade)
 }
