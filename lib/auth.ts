@@ -12,7 +12,6 @@ export const authOptions: AuthOptions = {
             clientId: env.GITHUB_ID,
             clientSecret: env.GITHUB_SECRET,
             profile(profile) {
-                console.log(profile)
                 return {
                     id: profile.id.toString(),
                     username: profile.login,
