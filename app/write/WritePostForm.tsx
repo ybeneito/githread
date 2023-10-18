@@ -18,11 +18,11 @@ const FormScheme = z.object({
   content: z.string().min(1).max(500),
 });
 
-export type WritePostFormValues = z.infer<typeof FormScheme>;
+export type WritePostFormType = z.infer<typeof FormScheme>;
 
 type WritePostFormProps = {
   user: User;
-  onSubmit: (values: WritePostFormValues) => Promise<string | void>;
+  onSubmit: (values: WritePostFormType) => Promise<string | void>;
 };
 
 export const WritePostForm = ({ user, onSubmit }: WritePostFormProps) => {
@@ -33,11 +33,12 @@ export const WritePostForm = ({ user, onSubmit }: WritePostFormProps) => {
 
   return (
     <div className="w-full">
-      <PostLayout user={user}>
+      <PostLayout user={user} className="w-full">
         <Form
           form={form}
           onSubmit={async (values) => {
             const postId = await onSubmit(values);
+
             router.push(`/post/${postId}`);
           }}
         >

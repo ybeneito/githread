@@ -15,10 +15,11 @@ export const metadata: Metadata = {
 }
 
 type LayoutProps = { 
-  children: React.ReactNode
+  children: React.ReactNode;
+  modal?: React.ReactNode;
 }
 
-export default function RootLayout({children}: LayoutProps) {
+export default function RootLayout({children, modal}: LayoutProps) {
   return (
     <html lang="en" className='h-full'>
         <body className={clsx(inter.className, 'bg-background h-full')}>
@@ -30,6 +31,7 @@ export default function RootLayout({children}: LayoutProps) {
               </div>
               <Footer />
             </div>
+            {modal}
           </ThemeProvider>
         </body>
     </html>

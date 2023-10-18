@@ -1,9 +1,9 @@
 "use server"
 import { getUser } from "@/src/query/user.query"
-import { WritePostFormValues } from "./WritePostForm"
+import { WritePostFormType } from "./WritePostForm"
 import { prisma } from "@/lib/primsa"
 
-export const createPost = async (values: WritePostFormValues) => {
+export const createPost = async (values: WritePostFormType) => {
     const user = await getUser()
     const post = await prisma.post.create({
         data: {
