@@ -8,7 +8,7 @@ export const Header = async () => {
   const session = await getAuthSession()
   return (
     <header className='fixed top-0 bg-background w-full border-b border-b-accent z-10'>
-        <div className='container flex items-center py-2 max-w-lg m-auto gap-1'>
+        <div className='flex items-center py-2 max-w-lg m-auto gap-1'>
             <h2 className='text-2xl font-bold mr-auto'>
                 Githread
             </h2>
