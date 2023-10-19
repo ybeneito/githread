@@ -42,4 +42,36 @@ export const getLatestPosts = async (userId?: string) => {
     })
 }
 
+export const getPostView = async (id: string, userId?: string) => {
+  return await prisma.post.findUnique({
+    where: {
+      id,
+    },
+    select: {
+      ...postSelectQuery(userId),
+      replies: {
+        select: {
+          ...postSelectQuery(userId),
+        },
+      },
+      parent: {
+        select: {
+          ...postSelectQuery(userId),
+        },
+      },
+    },
+  });
+ } 
+
+export const getPost = async (id: string, userId?: string) => { 
+  return await prisma.post.findUnique({
+    where: {
+      id,
+  },
+  select: {
+    ...postSelectQuery(userId)
+  }
+})
+}
+
 export type PostHome = Prisma.PromiseReturnType<typeof getLatestPosts>[number]

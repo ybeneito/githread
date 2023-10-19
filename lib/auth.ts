@@ -32,8 +32,7 @@ export const authOptions: AuthOptions = {
 }
 
 export const getAuthSession = async () => {
-    const session = await getServerSession(authOptions)
-    return session
+    return await getServerSession(authOptions)
 }
 
 

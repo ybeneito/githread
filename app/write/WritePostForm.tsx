@@ -38,8 +38,8 @@ export const WritePostForm = ({ user, onSubmit }: WritePostFormProps) => {
           form={form}
           onSubmit={async (values) => {
             const postId = await onSubmit(values);
-
-            router.push(`/post/${postId}`);
+            router.push(`/posts/${postId}`);
+            router.refresh()
           }}
         >
           <FormField
