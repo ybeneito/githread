@@ -1,4 +1,4 @@
-import { getUserEdit } from '@/src/query/user.query'
+import { getUserEdit, getUserProfile } from '@/src/query/user.query'
 import React from 'react'
 import { ProfileForm } from './ProfileForm'
 import { editProfile } from './edit-profile.action'

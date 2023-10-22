@@ -7,6 +7,14 @@ import { Profile } from '../users/[userId]/Profile'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Post } from '@/src/features/post/Post'
+import { Metadata } from 'next'
+
+export const generateMetadata = (): Metadata => {
+  return ({
+    title: "My Profile"
+  })
+}
+
 
 export default async function ProfilePage() {
   const session = await getAuthSession()
