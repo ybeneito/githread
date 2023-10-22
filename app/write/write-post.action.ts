@@ -2,6 +2,7 @@
 import { getUser } from "@/src/query/user.query"
 import { WritePostFormType } from "./WritePostForm"
 import { prisma } from "@/lib/primsa"
+import { redirect } from "next/navigation"
 
 export const createPost = async (values: WritePostFormType) => {
     const user = await getUser()
@@ -11,5 +12,11 @@ export const createPost = async (values: WritePostFormType) => {
             userId: user.id,
         }
     })
-    return post.id
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    try {
+      redirect(`/posts/${post.id}`);
+    } catch (error) {
+      return `/posts/${post.id}`;
+    }
 }
